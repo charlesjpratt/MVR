@@ -6,14 +6,16 @@ public class Ship{
 
 	public string name;
 	public Vec2 position;
-	public Vec2 acceleration;
+	public float acceleration;
 
 	protected string _spritePath;
 	protected GameObject _instance = new GameObject();
 	protected SpriteRenderer _renderer = new SpriteRenderer();
 
 	private Vec2 _velocity = new Vec2(0,0);
-	private float _maxVelocity = 1;
+	private float _maxVelocity = 0.045f;
+
+	public enum Direction { RIGHT, LEFT, UP, DOWN }
 
 	public Ship(float x, float y, string name, string path){
 
@@ -33,20 +35,27 @@ public class Ship{
 
 		_instance.name = name;
 
-		acceleration = new Vec2(0.005f, 0);
+		acceleration = 0.05f;
 	}
 
 	public void Update(){
 
-		_velocity += acceleration;
-
-		Vec2.Clamp(ref _velocity, 0, _maxVelocity);
-
-		position += _velocity;
+		Vec2.Clamp(ref _velocity, -_maxVelocity, _maxVelocity);
 
 		Debug.Log(_velocity.x);
 
+		position += _velocity;
+
 		_instance.transform.position = new Vector3(position.x, position.y, 0);
+	}
+
+	public void Move(Direction direction){
+
+		switch(direction){
+
+			case Direction.LEFT: _velocity.x -= acceleration; break;
+			case Direction.RIGHT: _velocity.x += acceleration; break;
+		}
 	}
 }
 
@@ -67,6 +76,8 @@ public struct Vec2{
 		if(vec.y > max){ vec.y = max; }
 		if(vec.x < min){ vec.x = min; }
 		if(vec.y < min){ vec.y = min; }
+
+
 	}
 
 	public static Vec2 operator +(Vec2 a, Vec2 b){

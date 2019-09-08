@@ -9,7 +9,7 @@ public class MainMananger : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         
-        player = new Ship(0,0, "Player Ship", "ship");
+        player = new Ship(0,-3, "Player Ship", "ship");
         player.Initialize();
 
     }
@@ -17,7 +17,17 @@ public class MainMananger : MonoBehaviour
     // Update is called once per frame
     void Update() {
        
-       player.Update();
+    	if(Input.GetKey(KeyCode.LeftArrow)){
 
+    		player.Move(Ship.Direction.LEFT);
+    		Debug.Log("Left Pressed!");
+    	}
+    	if(Input.GetKey(KeyCode.RightArrow)){
+
+    		player.Move(Ship.Direction.RIGHT);
+    		Debug.Log("Right Pressed!");
+    	}
+
+       player.Update();
     }
 }
