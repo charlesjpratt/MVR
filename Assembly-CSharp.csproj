@@ -57,8 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\MainMananger.cs" />
     <Compile Include="Assets\Ship.cs" />
+    <Compile Include="Assets\Von.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/charlespratt/Dropbox/Games/MVR/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
