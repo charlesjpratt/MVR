@@ -7,6 +7,7 @@ public class Ship{
 	public string name;
 	public Vec2 position;
 	public float acceleration;
+	public float friction;
 
 	protected string _spritePath;
 	protected GameObject _instance = new GameObject();
@@ -36,11 +37,14 @@ public class Ship{
 		_instance.name = name;
 
 		acceleration = 0.05f;
+		friction = 0.007f;
 	}
 
 	public void Update(){
 
 		Vec2.Clamp(ref _velocity, -_maxVelocity, _maxVelocity);
+
+		ApplyFriction();
 
 		Debug.Log(_velocity.x);
 
@@ -56,6 +60,14 @@ public class Ship{
 			case Direction.LEFT: _velocity.x -= acceleration; break;
 			case Direction.RIGHT: _velocity.x += acceleration; break;
 		}
+	}
+
+	private void ApplyFriction(){
+
+		if(_velocity.x < 0){ _velocity.x += friction; }
+		if(_velocity.x > 0){ _velocity.x -= friction; }
+
+		if(Mathf.Abs(_velocity.x) < 0.01){ _velocity.x = 0; }
 	}
 }
 

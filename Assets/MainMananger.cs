@@ -20,12 +20,12 @@ public class MainMananger : MonoBehaviour
     	if(Input.GetKey(KeyCode.LeftArrow)){
 
     		player.Move(Ship.Direction.LEFT);
-    		Debug.Log("Left Pressed!");
+    		//Debug.Log("Left Pressed!");
     	}
     	if(Input.GetKey(KeyCode.RightArrow)){
 
     		player.Move(Ship.Direction.RIGHT);
-    		Debug.Log("Right Pressed!");
+    		//Debug.Log("Right Pressed!");
     	}
 
        player.Update();
